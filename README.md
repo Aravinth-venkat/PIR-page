@@ -1,27 +1,28 @@
-# RED PIF Requirement Intake — Frontend Prototype
+# RED – PIF Requirement Intake
 
-A standalone frontend-only prototype inspired by an enterprise ServiceNow Catalog Item experience.
+Frontend-only prototype for a ServiceNow-style Red PIF Requirement Intake form.
 
-## Run
-Open `index.html` in any modern browser.
+## Files
+- `index.html` – complete form markup/content
+- `styles.css` – responsive enterprise/ServiceNow-style UI
+- `app.js` – navigation, conditional logic, validation, review summary, local draft
 
-No backend, database, API, ServiceNow connection, authentication, or external dependency is required.
-
-## Included
-- ServiceNow-style enterprise form layout
-- Step/progress navigation
-- Dynamic solution-specific questions
-- API/APIGEE conditional section
-- File upload UI
-- Required-field validation
-- Review-before-submit screen
-- Local browser draft save
-- Responsive desktop/mobile layout
+## Included behavior
+- Five solution types
+- Common business/current/future-state requirements
+- Solution-specific conditional questions
+- Approval multi-select actions
+- Alert proactive/reminder branching
+- Business Query 7–10 utterance validation
+- Guided Path external-redirection branching
+- Enhancement 3–5 utterance validation and multi-select changes
+- API/APIGEE conditional requirements
+- Technical owner becomes mandatory when API integration is selected
+- Security/data and project information
+- Complete review summary
+- Local Save Draft / Clear Draft
+- File-name display after selecting uploads
 - Prototype-only submit confirmation
+- Mobile responsive layout
 
-## Main dynamic paths
-Approval
-Alert / Notification
-Business Query / Fetch & Display
-Guided Path
-Enhancement to an Existing Red Capability
+No backend, authentication, file storage, ServiceNow record creation, or real API integration is included.
