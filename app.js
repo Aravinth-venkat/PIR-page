@@ -1,0 +1,56 @@
+const steps=["Solution type","Business requirement","Current & future process","Solution-specific","API & integration","Technical owner","Security & data","Project information","Review"];
+let current=0;
+const sections=[...document.querySelectorAll(".form-section")];
+const stepNav=document.getElementById("stepNav");
+const solutionType=document.getElementById("solutionType");
+const specificFields=document.getElementById("specificFields");
+const specificTitle=document.getElementById("specificTitle");
+const specificSubtitle=document.getElementById("specificSubtitle");
+const apiAvailable=document.getElementById("apiAvailable");
+const apiDetails=document.getElementById("apiDetails");
+const validation=document.getElementById("validation");
+
+function renderNav(){
+  stepNav.innerHTML=steps.map((s,i)=>`<div class="step ${i===current?"active":""} ${i<current?"done":""}" data-i="${i}"><span class="circle">${i<current?"✓":i+1}</span><span>${s}</span></div>`).join("");
+  stepNav.querySelectorAll(".step").forEach(el=>el.onclick=()=>{const i=+el.dataset.i;if(i<=current+1){current=i;render()}})
+}
+function render(){sections.forEach((s,i)=>s.classList.toggle("active",i===current));renderNav();document.getElementById("backBtn").disabled=current===0;document.getElementById("nextBtn").textContent=current===sections.length-1?"Submit":"Next";validation.textContent="";window.scrollTo({top:0,behavior:"smooth"})}
+function input(id,label,type="text",opts={}){let req=opts.required?" *":"";let cls=opts.full?"field full":"field";if(type==="textarea")return `<div class="${cls}"><label for="${id}">${label}${opts.required?'<em>*</em>':''}</label><textarea id="${id}" ${opts.large?'class="large"':''} placeholder="${opts.placeholder||""}"></textarea></div>`;if(type==="select")return `<div class="${cls}"><label for="${id}">${label}${opts.required?'<em>*</em>':''}</label><select id="${id}"><option value="">Select</option>${opts.options.map(x=>`<option>${x}</option>`).join("")}</select></div>`;return `<div class="${cls}"><label for="${id}">${label}${opts.required?'<em>*</em>':''}</label><input id="${id}" type="${type}" placeholder="${opts.placeholder||""}"></div>`}
+function buildSpecific(){
+ const t=solutionType.value;
+ specificFields.innerHTML="";
+ if(!t){specificTitle.textContent="Solution-specific requirements";specificSubtitle.textContent="Select a solution type to see the relevant questions.";return}
+ let html="";
+ if(t==="approval"){specificTitle.textContent="Approval requirements";specificSubtitle.textContent="Capture approval flow, approvers, actions, reminders, and notification details.";html=`<div class="grid two">${input("a1","How are approvals managed today?","textarea",{full:true})}${input("a2","What is the approval flow today?","textarea",{full:true,large:true})}${input("a3","How many approval levels are required?","number")}${input("a4","Who are the approvers?","textarea")}${input("a5","What information should be displayed to the approver in Red?","textarea",{full:true,placeholder:"Request number, requester, amount, project, date, status, etc."})}${input("a6","What action should the user be able to perform?","select",{options:["Approve","Reject","Skip","Other"]})}${input("a7","How many reminders should Red send?","select",{options:["No reminder","1 reminder — 7 days after initial notification","2 reminders — both during Week 1","2 reminders — one during Week 1 and one during Week 2"]})}${input("a8","Approval notification template","textarea",{full:true,placeholder:"Paste the notification copy or describe the expected template."})}</div><div class="conditional-note">Daily alerts/reminders are not supported because they may negatively impact the user experience.</div>`}
+ if(t==="alert"){specificTitle.textContent="Alert / notification requirements";specificSubtitle.textContent="Define recipients, triggers, notification type, and templates.";html=`<div class="grid two">${input("b1","How are notifications managed today?","textarea",{full:true})}${input("b2","Who should receive the notification?","textarea")}${input("b3","What event should trigger the notification?","textarea")}${input("b4","How many notifications are sent/received monthly?","number")}${input("b5","Is this notification?","select",{options:["Proactive notification","Reminder notification","Both"]})}</div><div class="conditional-note">After selecting Proactive or Reminder, provide the recipient, trigger, timing, information, and template details in the fields below.</div><div class="grid two" style="margin-top:18px">${input("b6","Proactive recipient / user group","text")}${input("b7","Proactive trigger event","textarea")}${input("b8","Information included in proactive notification","textarea")}${input("b9","Proactive notification template","textarea")}${input("b10","Reminder trigger / timing","textarea")}${input("b11","Reminder time","time")}${input("b12","Reminder recipient / user group","text")}${input("b13","Reminder notification template","textarea")}</div>`}
+ if(t==="query"){specificTitle.textContent="Business query / fetch & display";specificSubtitle.textContent="Define what users ask, what Red retrieves, and how results should appear.";html=`<div class="grid two">${input("c1","What information should users be able to retrieve from Red?","textarea",{full:true})}${input("c2","What application/system contains this information?","text")}${input("c3","What should trigger the Red conversation?","textarea")}${input("c4","7–10 example questions users may ask Red","textarea",{full:true,large:true,placeholder:"Example: Show my pending approvals. What is the status of my request? Show my open requests."})}${input("c5","What data should Red retrieve?","textarea",{full:true})}${input("c6","What fields should Red display to the user?","textarea")}${input("c7","How should the information be displayed?","select",{options:["Simple response","List","Table","Cards","Summary + details","Other"]})}${input("c8","Expected Red response / mockup","textarea")}${input("c9","Does this require Labor Employee Relations (LER) approval?","select",{options:["Yes","No","Not sure"]})}</div>`}
+ if(t==="guided"){specificTitle.textContent="Guided Path requirements";specificSubtitle.textContent="Define the questions, sequence, and any external redirection.";html=`<div class="grid two">${input("d1","What process should the Guided Path help the user complete?","textarea",{full:true})}${input("d2","Approximately how many questions will the user need to answer?","number")}${input("d3","What questions should Red ask the user?","textarea",{full:true,large:true,placeholder:"List expected questions in sequence if known."})}${input("d4","Does the user need to be redirected outside Red?","select",{options:["Yes","No","Not sure"]})}${input("d5","Which application should the user be redirected to?","text")}${input("d6","Why does the user need to leave the Red conversation?","textarea")}${input("d7","What information should Red pass to the external application/form?","textarea",{full:true})}</div>`}
+ if(t==="enhancement"){specificTitle.textContent="Existing Red capability / enhancement";specificSubtitle.textContent="Tell us what exists today and exactly what should change.";html=`<div class="grid two">${input("e1","What existing Red capability needs to be enhanced?","text",{required:true})}${input("e2","Conversation ID / Process ID / Action ID","text")}${input("e3","What does the existing Red capability do today?","textarea",{full:true})}${input("e4","3–5 example questions/utterances currently used to trigger it","textarea",{full:true})}${input("e5","What specifically needs to change?","select",{options:["Trigger / utterances","Conversation flow","Questions","API","API parameters","API response","Data displayed","Response format","Notification","Reminder","Approval logic","User experience","Other"]})}${input("e6","Describe the required changes in detail","textarea",{full:true,large:true,placeholder:"What needs to change, where it needs to change, and when the new behavior should occur."})}${input("e7","Expected result after the enhancement","textarea",{full:true})}</div>`}
+ specificFields.innerHTML=html;
+}
+function checkCurrent(){
+ const required=[...sections[current].querySelectorAll("[required]")].filter(x=>!x.closest(".hidden"));
+ const missing=required.find(x=>!x.value.trim());
+ if(missing){validation.textContent="Please complete the required field: "+(missing.previousElementSibling?.innerText||"Required field");missing.focus();return false}
+ if(current===0&&!solutionType.value){validation.textContent="Please select a solution type.";return false}
+ if(current===1&&(!document.getElementById("users").value||!document.getElementById("application").value)){validation.textContent="Please complete the required business fields.";return false}
+ return true;
+}
+function val(id){const e=document.getElementById(id);return e?e.value||"—":"—"}
+function buildReview(){
+ const t=solutionType.options[solutionType.selectedIndex]?.text||"—";
+ const pairs=[["Solution",t],["Business reason",val("businessReason")],["Target audience",val("audience")],["Users impacted",val("users")],["Application",val("application")],["Current process",val("currentProcess")],["Future-state requirement",val("futureProcess")],["API available",val("apiAvailable")],["APIGEE / wrapper",val("wrapper")],["Technical owner",val("techName")],["Technical email",val("techEmail")],["Benefit type",val("benefitType")],["Expected benefit",val("benefitAmount")]];
+ document.getElementById("reviewSummary").innerHTML=pairs.map(([a,b])=>`<div class="review-item"><div class="label">${a}</div><div class="value">${escapeHtml(b)}</div></div>`).join("");
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+solutionType.addEventListener("change",()=>{buildSpecific();document.getElementById("solutionHint").classList.toggle("hidden",!solutionType.value);document.getElementById("solutionHint").textContent=solutionType.value?"Great — the next sections will adapt to your selected solution type.":"Select a solution to continue.";});
+apiAvailable.addEventListener("change",()=>apiDetails.classList.toggle("hidden",apiAvailable.value!=="Yes"));
+document.getElementById("backBtn").onclick=()=>{if(current>0){current--;render()}};
+document.getElementById("nextBtn").onclick=()=>{
+ if(current<sections.length-1){if(!checkCurrent())return;current++;if(current===8)buildReview();render()}
+ else {if(!checkCurrent())return;showToast("Requirement submitted successfully — prototype only. No record was created.");}
+};
+document.getElementById("saveBtn").onclick=()=>{localStorage.setItem("redPifDraft",JSON.stringify([...document.querySelectorAll("input,select,textarea")].reduce((o,e)=>(o[e.id]=e.value,o),{})));showToast("Draft saved locally in this browser.");};
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem("redPifDraft")||"{}");Object.entries(d).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v});buildSpecific();}catch(e){}}
+function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2600)}
+loadDraft();render();

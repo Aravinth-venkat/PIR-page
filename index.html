@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RED PIF Requirement Intake</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">R</span><span>RED</span></div>
+    <div class="top-title">PIF Requirement Intake</div>
+    <div class="top-actions"><span class="badge">Prototype</span></div>
+  </header>
+
+  <main class="shell">
+    <div class="crumb">Service Catalog <span>›</span> Red <span>›</span> PIF Requirement Intake</div>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">RED PIF</div>
+        <h1>Red PIF Requirement Intake</h1>
+        <p>Provide the information required to assess, design, develop, test, and implement your Red solution.</p>
+      </div>
+      <div class="hero-note"><strong>Guided intake</strong><br>Only relevant questions will appear based on your selections.</div>
+    </section>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Request progress</div>
+        <div id="stepNav"></div>
+        <div class="side-help">
+          <strong>Need technical help?</strong>
+          <p>If you are unsure about API, APIGEE, authentication, or integration questions, involve your application/technical owner.</p>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="info-banner">
+          <span class="info-icon">i</span>
+          <div>
+            <strong>Before you start</strong>
+            <p>Depending on your solution type, you may need process documentation, example user questions, API/Postman details, APIGEE information, notification templates, or a technical owner.</p>
+          </div>
+        </div>
+
+        <form id="pifForm" novalidate>
+          <section class="form-section active" data-step="0">
+            <div class="section-heading">
+              <div><span class="section-number">1</span><div><h2>Solution type</h2><p>Tell us what you want to build or change in Red.</p></div></div>
+            </div>
+            <div class="field">
+              <label for="solutionType">What type of solution do you need for Red? <em>*</em></label>
+              <select id="solutionType" required>
+                <option value="">Select a solution type</option>
+                <option value="approval">Approval</option>
+                <option value="alert">Alert / Notification</option>
+                <option value="query">Business Query / Fetch & Display</option>
+                <option value="guided">Guided Path</option>
+                <option value="enhancement">Enhancement to an Existing Red Capability</option>
+              </select>
+            </div>
+            <div id="solutionHint" class="conditional-note hidden"></div>
+          </section>
+
+          <section class="form-section" data-step="1">
+            <div class="section-heading"><div><span class="section-number">2</span><div><h2>Business requirement</h2><p>Help us understand the problem, users, and business context.</p></div></div></div>
+            <div class="grid two">
+              <div class="field full"><label for="businessReason">Why do you want to move this process into Red? <em>*</em></label><textarea id="businessReason" required placeholder="Describe the business problem, pain point, or reason for using Red."></textarea></div>
+              <div class="field"><label for="audience">Who will use this process? <em>*</em></label><textarea id="audience" required placeholder="Target audience, user group, or teams"></textarea></div>
+              <div class="field"><label for="users">How many users will be impacted? <em>*</em></label><input id="users" type="number" min="0" placeholder="e.g. 500"></div>
+              <div class="field"><label for="incidents">Monthly incidents / service requests</label><input id="incidents" type="number" min="0" placeholder="e.g. 1200"></div>
+              <div class="field"><label for="approvalsMonthly">Monthly approvals</label><input id="approvalsMonthly" type="number" min="0" placeholder="If applicable"></div>
+              <div class="field"><label for="application">What application/system is involved? <em>*</em></label><input id="application" required placeholder="e.g. Ecosys, SAP, ServiceNow"></div>
+              <div class="field"><label for="dataStore">Where is the data currently stored?</label><input id="dataStore" placeholder="e.g. ServiceNow, SAP, Jira, database"></div>
+            </div>
+          </section>
+
+          <section class="form-section" data-step="2">
+            <div class="section-heading"><div><span class="section-number">3</span><div><h2>Current & future process</h2><p>Describe today's process and the experience you want Red to provide.</p></div></div></div>
+            <div class="field"><label for="currentProcess">Describe your current process in detail. <em>*</em></label><textarea id="currentProcess" class="large" required placeholder="Explain step-by-step: trigger, activities, people, systems, final outcome, and why the current process exists."></textarea></div>
+            <div class="field"><label>Current process documentation</label><div class="upload"><input type="file" id="currentDoc" multiple><div><strong>Upload files</strong><span>Process flow, diagram, SOP, screenshot, or existing documentation</span></div></div></div>
+            <div class="field"><label for="futureProcess">Describe the process you want Red to follow. <em>*</em></label><textarea id="futureProcess" class="large" required placeholder="Explain how the user starts, what Red asks, what Red does, what it retrieves/displays, and what happens when complete."></textarea></div>
+            <div class="field"><label>Future-state process flow</label><div class="upload"><input type="file" id="futureDoc" multiple><div><strong>Upload files</strong><span>Diagram, screenshot, mockup, or supporting documentation</span></div></div></div>
+          </section>
+
+          <section class="form-section conditional" data-step="3" id="specificSection">
+            <div class="section-heading"><div><span class="section-number">4</span><div><h2 id="specificTitle">Solution-specific requirements</h2><p id="specificSubtitle">Questions will change based on your selected solution.</p></div></div></div>
+            <div id="specificFields"></div>
+          </section>
+
+          <section class="form-section" data-step="4">
+            <div class="section-heading"><div><span class="section-number">5</span><div><h2>API & integration</h2><p>Capture integration details. Do not guess technical information.</p></div></div></div>
+            <div class="field"><label for="apiAvailable">Does the application have an API available for integration with Red? <em>*</em></label><select id="apiAvailable" required><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option><option>API is not required</option></select></div>
+            <div id="apiDetails" class="hidden">
+              <div class="grid two">
+                <div class="field"><label for="apiCount">How many APIs are required?</label><select id="apiCount"><option>1</option><option>2 or more</option></select></div>
+                <div class="field"><label for="wrapper">Does the integration require an APIGEE/API wrapper?</label><select id="wrapper"><option value="">Select</option><option>Yes — APIGEE/wrapper already exists</option><option>Yes — APIGEE/wrapper needs to be provided</option><option>No</option><option>Not sure</option></select></div>
+                <div class="field full"><label for="apiInfo">API details</label><textarea id="apiInfo" class="large" placeholder="Endpoint, HTTP method, authentication, headers, parameters, body, sample request/response, errors, API owner/contact."></textarea></div>
+                <div class="field full"><label for="wrapperInfo">APIGEE / wrapper details</label><textarea id="wrapperInfo" placeholder="APIGEE endpoint/wrapping URL, authentication requirements, expected request/response, or other integration information."></textarea></div>
+                <div class="field full"><label for="redNeeds">Does the application team require anything from Red for the integration?</label><textarea id="redNeeds" placeholder="API, APIGEE, callback, authentication, payload, or other technical information required from Red."></textarea></div>
+              </div>
+              <div class="tech-callout">If you are unsure, please involve your application/technical owner rather than guessing.</div>
+            </div>
+          </section>
+
+          <section class="form-section" data-step="5">
+            <div class="section-heading"><div><span class="section-number">6</span><div><h2>Technical owner</h2><p>Identify the person who can support integration and technical clarification.</p></div></div></div>
+            <div class="grid two">
+              <div class="field"><label for="techName">Technical / application owner</label><input id="techName" placeholder="Name"></div>
+              <div class="field"><label for="techEmail">Email</label><input id="techEmail" type="email" placeholder="name@company.com"></div>
+              <div class="field"><label for="techTeam">Team / role</label><input id="techTeam" placeholder="Team and role"></div>
+              <div class="field"><label for="techAvailable">Is the technical/application owner available to work with Red?</label><select id="techAvailable"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+              <div class="field full"><label>Additional technical documentation</label><div class="upload"><input type="file" id="techDocs" multiple><div><strong>Upload files</strong><span>Postman collection, API specification, architecture diagram, data dictionary, sample payload</span></div></div></div>
+            </div>
+          </section>
+
+          <section class="form-section" data-step="6">
+            <div class="section-heading"><div><span class="section-number">7</span><div><h2>Security & data</h2><p>Tell us about information, access, privacy, and compliance constraints.</p></div></div></div>
+            <div class="field"><label for="security">Are there any security, privacy, compliance, or data constraints we need to consider?</label><textarea id="security" class="large" placeholder="Sensitive/personal data, access restrictions, authorization, retention, environment restrictions, production/QA limitations, compliance requirements, etc."></textarea></div>
+          </section>
+
+          <section class="form-section" data-step="7">
+            <div class="section-heading"><div><span class="section-number">8</span><div><h2>Project information</h2><p>Capture sponsorship, service, contacts, benefits, and baseline metrics.</p></div></div></div>
+            <div class="grid two">
+              <div class="field"><label for="sponsor">Sponsor</label><input id="sponsor" placeholder="Name"></div>
+              <div class="field"><label for="service">ServiceNow service</label><input id="service" placeholder="Select or enter service"></div>
+              <div class="field"><label for="contacts">Project contact(s)</label><input id="contacts" placeholder="Names / teams"></div>
+              <div class="field"><label for="benefitType">Benefit type</label><select id="benefitType"><option value="">Select</option><option>Cost reduction</option><option>Time saved</option><option>User experience</option><option>Risk reduction</option><option>Compliance</option><option>Other</option></select></div>
+              <div class="field"><label for="benefitAmount">Expected benefit amount</label><input id="benefitAmount" type="number" min="0" placeholder="Amount"></div>
+              <div class="field full"><label for="metrics">Current metrics</label><textarea id="metrics" placeholder="Monthly ticket volume, manual effort, processing time, users, approvals, notifications, SLA, error rate, etc."></textarea></div>
+              <div class="field full"><label for="additional">Is there anything else the Red team should know?</label><textarea id="additional" placeholder="Additional information, assumptions, dependencies, or constraints."></textarea></div>
+            </div>
+          </section>
+
+          <section class="form-section review" data-step="8">
+            <div class="section-heading"><div><span class="section-number">9</span><div><h2>Review before submission</h2><p>Check your information before submitting the requirement.</p></div></div></div>
+            <div id="reviewSummary" class="review-grid"></div>
+            <div class="submit-note">This is a frontend prototype. Submit will only show a confirmation message; no backend or ServiceNow record is created.</div>
+          </section>
+
+          <div class="validation" id="validation"></div>
+          <div class="actions">
+            <button type="button" class="btn secondary" id="backBtn">Back</button>
+            <div class="action-right"><button type="button" class="btn ghost" id="saveBtn">Save draft</button><button type="button" class="btn primary" id="nextBtn">Next</button></div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
