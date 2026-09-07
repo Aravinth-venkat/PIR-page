@@ -1,81 +1,32 @@
-# RED – PIF Requirement Intake – Enhanced V3
+# RED PIF Requirement Intake – Progressive V4
 
-Frontend-only ServiceNow-style prototype.
+This version changes the interaction model based on feedback:
 
-## What is enhanced in this version
+## No Next / Back / Save Draft buttons
+The form is progressive. The user makes a selection or enters the required information, and the next relevant section automatically appears.
 
-### Approval
-- Identifies the current approval-owning system.
-- Supports ServiceNow, SAP, ETR, and other applications.
-- Captures approval levels, approvers, information, and actions.
-- Captures what should happen in the source system after Approve/Reject/etc.
-- Separately captures proactive approval notification requirements.
-- Separately captures reminder requirements and supported reminder schedules.
-- Includes a suggested action-button preview.
+Example:
+1. Select Approval
+2. Business Requirement appears
+3. Complete the business requirement
+4. Current & Future Process appears
+5. Complete the process
+6. Approval-specific questions appear
+7. Integration question appears
+8. Technical/Security/Project sections progressively appear
+9. Review is generated automatically
 
-### Alert / Notification
-- Supports Proactive, Reminder, or Both through checkbox selection.
-- Proactive details appear only when selected.
-- Reminder details appear only when selected.
-- Captures source system/event and templates.
+## Conditional behavior
+- Approval has separate proactive and reminder requirements.
+- Alert/Notification supports Proactive, Reminder, or Both.
+- Guided Path only shows external handoff questions when Yes is selected.
+- Business Query requires 7–10 utterances.
+- Enhancement requires 3–5 existing utterances.
+- Integration supports ServiceNow, SAP, ETR, other third parties, internal applications, databases, and multiple systems.
+- Technical owner becomes mandatory when integration is Yes.
+- API/APIGEE details are captured when integration is required.
+- Result/action buttons are captured for Business Query and enhancement requirements.
+- Approval includes action-button preview.
 
-### Business Query
-- Requires 7–10 example utterances.
-- Captures source system.
-- Captures retrieved data and displayed fields.
-- Captures result display format.
-- Captures optional action buttons such as View Details, Open Record, Approve, Reject, Submit, Retry, Refresh, Back, Cancel.
-
-### Guided Path
-- Captures the process and question sequence.
-- Captures the final action/button.
-- If redirected outside Red, captures target application, reason, and data passed.
-
-### Enhancement
-- Captures existing Red IDs and utterances.
-- Supports multiple change areas.
-- Includes Buttons / Actions as an enhancement category.
-- Captures affected source system.
-
-### Integration
-- Explicitly asks whether integration is required.
-- Captures system type:
-  - ServiceNow
-  - SAP
-  - ETR
-  - Other third-party application
-  - Internal application
-  - Database
-  - Multiple systems
-- Captures system name.
-- Captures whether Red gets data, sends data, updates data, or triggers an action.
-- Captures data sent and received.
-- Captures API/Postman/documentation details.
-- Captures APIGEE/wrapper details.
-- Captures requirements from the application/third-party team.
-
-### Technical owner
-Becomes mandatory when integration is required.
-
-## Deployment
-This package is static HTML/CSS/JavaScript and can be hosted using GitHub Pages.
-
-If the repository is `Aravinth-venkat/PIR-page`, the normal GitHub Pages project URL is:
-`https://aravinth-venkat.github.io/PIR-page/`
-
-A genuinely different public website hostname requires either:
-1. a separate GitHub repository with its own Pages URL, or
-2. a custom domain/subdomain configured to GitHub Pages.
-
-Changing the ZIP/package does not by itself create a new public URL.
-
-## No backend
-This version does not:
-- create ServiceNow records
-- call ServiceNow/SAP/ETR APIs
-- store uploaded files remotely
-- authenticate users
-- send real notifications
-- send real approval/reminder messages
-
-It is intentionally a frontend prototype for validating the question/form design.
+## Prototype
+No backend, ServiceNow record creation, real API calls, real notifications, authentication, or remote file storage are included.
