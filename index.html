@@ -10,7 +10,7 @@
 <header class="topbar">
   <div class="brand"><span class="brand-mark">R</span><span>RED</span></div>
   <div class="top-title">PIF Requirement Intake</div>
-  <span class="badge">Progressive Prototype</span>
+  <span class="badge">Enhanced Progressive Prototype</span>
 </header>
 
 <main class="shell">
@@ -20,29 +20,28 @@
     <div>
       <div class="eyebrow">RED PIF • REQUIREMENT INTAKE</div>
       <h1>Red PIF Requirement Intake</h1>
-      <p>Answer each question as it appears. The form automatically reveals the next relevant requirement based on your selections.</p>
+      <p>Capture the complete business, process, solution, approval, notification and integration requirements. Questions appear progressively based on your selections.</p>
     </div>
     <div class="hero-note">
-      <strong>No Next button required</strong>
-      <span>Selections immediately reveal the relevant questions. No Save Draft button is required for this prototype.</span>
+      <strong>Progressive form</strong>
+      <span>No Next, Back or Save Draft buttons. Select an answer and the relevant follow-up fields appear automatically.</span>
     </div>
   </section>
 
   <div class="progress-wrap">
-    <div class="progress-top"><strong id="progressLabel">Start with your solution type</strong><span id="progressPercent">10%</span></div>
+    <div class="progress-top"><strong id="progressLabel">Select a solution type to begin</strong><span id="progressPercent">8%</span></div>
     <div class="progress"><div id="progressBar"></div></div>
   </div>
 
   <section class="info-banner">
     <span class="info-icon">i</span>
     <div><strong>Before you start</strong>
-    <p>You may need the current/future process, application or third-party system name, example user questions, data/fields, notification templates, approval details, API/Postman documentation, APIGEE/wrapper information, existing Red IDs, and a technical owner.</p></div>
+    <p>Have the current/future process, application or third-party system name, example user questions, required data/fields, approval details, notification templates, API documentation/Postman collection, API methods, APIGEE/API-wrapper information, existing Red IDs and technical owner details available where applicable. If you are unsure about technical information, involve the application technical owner.</p></div>
   </section>
 
   <form id="pifForm" novalidate>
-
-    <section class="card reveal visible" id="step-solution">
-      <div class="heading"><span class="num">1</span><div><h2>Solution type</h2><p>Selecting a solution immediately opens the next relevant section.</p></div></div>
+    <section class="card reveal visible" id="solutionSection">
+      <div class="heading"><span class="num">1</span><div><h2>Solution type</h2><p>Your selection controls which requirement questions appear.</p></div></div>
       <div class="field">
         <label for="solutionType">What type of solution do you need for Red? <em>*</em></label>
         <select id="solutionType" required>
@@ -57,24 +56,24 @@
     </section>
 
     <section class="card reveal" id="businessSection">
-      <div class="heading"><span class="num">2</span><div><h2>Business requirement</h2><p>These fields appear after the solution type is selected.</p></div></div>
+      <div class="heading"><span class="num">2</span><div><h2>Business requirement</h2><p>Complete these fields to reveal the current/future process.</p></div></div>
       <div class="grid two">
-        <div class="field full"><label for="businessReason">Why do you want to move this process into Red? <em>*</em></label><textarea id="businessReason" required placeholder="Business problem, pain point, manual effort, user experience issue, or reason."></textarea></div>
+        <div class="field full"><label for="businessReason">Why do you want to move this process into Red? <em>*</em></label><textarea id="businessReason" required></textarea></div>
         <div class="field"><label for="audience">Who will use this process? <em>*</em></label><textarea id="audience" required></textarea></div>
         <div class="field"><label for="users">How many users will be impacted? <em>*</em></label><input id="users" type="number" min="0" required></div>
         <div class="field"><label for="incidents">Monthly incidents / service requests</label><input id="incidents" type="number" min="0"></div>
         <div class="field"><label for="approvalsMonthly">Monthly approvals</label><input id="approvalsMonthly" type="number" min="0"></div>
         <div class="field"><label for="application">Primary application / system involved <em>*</em></label><input id="application" required placeholder="ServiceNow, SAP, ETR, etc."></div>
-        <div class="field"><label for="dataStore">Where is the data currently stored?</label><input id="dataStore" placeholder="ServiceNow, SAP, ETR, database, etc."></div>
+        <div class="field"><label for="dataStore">Where is the data currently stored?</label><input id="dataStore"></div>
       </div>
     </section>
 
     <section class="card reveal" id="processSection">
-      <div class="heading"><span class="num">3</span><div><h2>Current & future process</h2><p>Once the business requirement is entered, the process section becomes available.</p></div></div>
-      <div class="field"><label for="currentProcess">Describe your current process in detail. <em>*</em></label><textarea id="currentProcess" class="large" required placeholder="Trigger, steps, people, systems, approvals, notifications, outcome and exceptions."></textarea></div>
-      <div class="field"><label>Current process documentation</label><div class="upload"><input type="file" id="currentDoc" multiple><div><strong>Upload files</strong><span>SOP, process flow, diagram or screenshots</span><small id="currentDocNames"></small></div></div></div>
-      <div class="field"><label for="futureProcess">Describe the process you want Red to follow. <em>*</em></label><textarea id="futureProcess" class="large" required placeholder="Explain the Red conversation, questions, system actions, result and completion behavior."></textarea></div>
-      <div class="field"><label>Future-state process flow</label><div class="upload"><input type="file" id="futureDoc" multiple><div><strong>Upload files</strong><span>Diagram, mockup, screenshot or supporting document</span><small id="futureDocNames"></small></div></div></div>
+      <div class="heading"><span class="num">3</span><div><h2>Current & future process</h2><p>Describe the existing process and the desired Red experience.</p></div></div>
+      <div class="field"><label for="currentProcess">Describe the current process in detail. <em>*</em></label><textarea id="currentProcess" class="large" required placeholder="Trigger, steps, people, systems, approvals, notifications, outcome and exceptions."></textarea></div>
+      <div class="field"><label>Current process documentation</label><div class="upload"><input type="file" id="currentDoc" multiple><div><strong>Upload process files</strong><span>SOP, process flow, diagram or screenshots</span><small id="currentDocNames"></small></div></div></div>
+      <div class="field"><label for="futureProcess">Describe the future-state Red process. <em>*</em></label><textarea id="futureProcess" class="large" required placeholder="Explain the Red conversation, questions, integrations, approvals, notifications, result and completion behavior."></textarea></div>
+      <div class="field"><label>Future-state process flow</label><div class="upload"><input type="file" id="futureDoc" multiple><div><strong>Upload future-state files</strong><span>Diagram, mockup, screenshot or supporting document</span><small id="futureDocNames"></small></div></div></div>
     </section>
 
     <section class="card reveal" id="specificSection">
@@ -83,48 +82,85 @@
     </section>
 
     <section class="card reveal" id="integrationSection">
-      <div class="heading"><span class="num">5</span><div><h2>Source systems & integration</h2><p>This section appears after the solution-specific requirements.</p></div></div>
+      <div class="heading"><span class="num">5</span><div><h2>Integration & API requirements</h2><p>Every external integration must identify the system, direction, methods and technical information.</p></div></div>
+
       <div class="field">
         <label for="integrationRequired">Does Red need to integrate with another application/system? <em>*</em></label>
         <select id="integrationRequired" required>
           <option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option>
         </select>
       </div>
+
       <div id="integrationDetails" class="hidden">
         <div class="grid two">
-          <div class="field"><label for="systemType">What type of system is involved? <em>*</em></label><select id="systemType"><option value="">Select</option><option>ServiceNow</option><option>SAP</option><option>ETR</option><option>Other third-party application</option><option>Internal application</option><option>Database</option><option>Multiple systems</option></select></div>
+          <div class="field"><label for="systemType">System type <em>*</em></label><select id="systemType"><option value="">Select</option><option>ServiceNow</option><option>SAP</option><option>ETR</option><option>Other third-party application</option><option>Internal application</option><option>Database</option><option>Multiple systems</option></select></div>
           <div class="field"><label for="systemName">System / application name <em>*</em></label><input id="systemName" placeholder="e.g. SAP S/4HANA, ServiceNow, ETR"></div>
-          <div class="field full"><label>What does Red need to do with this system? <em>*</em></label><div class="choice-group"><label class="choice"><input type="checkbox" name="integrationDirection" value="Get / Fetch data"><span>Get / Fetch data</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="Send / Create data"><span>Send / Create data</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="Update data"><span>Update data</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="Trigger an action"><span>Trigger an action</span></label></div></div>
-          <div class="field full"><label for="dataSent">What information will Red send to the system?</label><textarea id="dataSent"></textarea></div>
-          <div class="field full"><label for="dataReceived">What information should Red receive from the system?</label><textarea id="dataReceived"></textarea></div>
-          <div class="field full"><label for="apiInfo">API / integration details <em>*</em></label><textarea id="apiInfo" class="large" placeholder="Endpoint, method, authentication, headers, parameters, body, sample request/response, errors, owner/contact, Postman/docs."></textarea></div>
-          <div class="field"><label for="apiCount">How many APIs are required?</label><select id="apiCount"><option value="">Select</option><option>1</option><option>2</option><option>3+</option></select></div>
-          <div class="field"><label for="wrapper">APIGEE / API wrapper</label><select id="wrapper"><option value="">Select</option><option>Yes — wrapper already exists</option><option>Yes — wrapper needs to be provided</option><option>No</option><option>Not sure</option></select></div>
-          <div class="field full"><label for="wrapperInfo">APIGEE / wrapper details</label><textarea id="wrapperInfo" placeholder="APIGEE endpoint/wrapping URL, authentication, request/response, etc."></textarea></div>
-          <div class="field full"><label for="systemTeamNeeds">What does the application / third-party team need from Red?</label><textarea id="systemTeamNeeds" placeholder="Callback URL, authentication, payload, headers, API specification, test data, certificates, network access, etc."></textarea></div>
+          <div class="field full"><label>What does Red need to do with the system? <em>*</em></label><div class="choice-group"><label class="choice"><input type="checkbox" name="integrationDirection" value="GET / Fetch"><span>GET / Fetch data</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="POST / Create"><span>POST / Create</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="PUT / Update"><span>PUT / Update</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="PATCH / Partial update"><span>PATCH / Partial update</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="DELETE"><span>DELETE</span></label><label class="choice"><input type="checkbox" name="integrationDirection" value="Trigger action"><span>Trigger action / other method</span></label></div></div>
+          <div class="field"><label for="methodCount">How many API methods/endpoints are planned? <em>*</em></label><select id="methodCount"><option value="">Select</option><option value="1">1 method</option><option value="2">2 methods</option><option value="3">3 methods</option><option value="4">4 methods</option><option value="5">5+ methods</option><option value="unknown">Not sure yet</option></select></div>
+          <div class="field"><label for="apiCount">How many APIs/services are involved?</label><select id="apiCount"><option value="">Select</option><option>1</option><option>2</option><option>3+</option><option>Not sure</option></select></div>
         </div>
-        <div class="tech-callout">ServiceNow, SAP, ETR and other third-party systems can have different integration patterns. Capture the actual system owner and technical details rather than assuming one pattern.</div>
+
+        <div id="methodDetails" class="method-list"></div>
+
+        <div class="question-block">
+          <div class="question-title">Postman & API documentation</div>
+          <div class="grid two">
+            <div class="field"><label for="postmanAvailable">Do you have a Postman collection? <em>*</em></label><select id="postmanAvailable"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="field"><label for="apiDocsAvailable">Do you have API documentation/specification?</label><select id="apiDocsAvailable"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="field full hidden" id="postmanUploadWrap"><label>Upload Postman collection <em>*</em></label><div class="upload"><input type="file" id="postmanFile" accept=".json,.zip,.yaml,.yml" multiple><div><strong>Upload Postman collection</strong><span>JSON/ZIP or supported API collection file</span><small id="postmanFileNames"></small></div></div></div>
+            <div class="field full hidden" id="apiDocsUploadWrap"><label>Upload API documentation</label><div class="upload"><input type="file" id="apiDocsFile" accept=".pdf,.doc,.docx,.txt,.yaml,.yml,.json" multiple><div><strong>Upload API specification</strong><span>Swagger/OpenAPI, PDF, Word or supporting documentation</span><small id="apiDocsFileNames"></small></div></div></div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-title">APIGEE / API wrapper</div>
+          <div class="grid two">
+            <div class="field"><label for="wrapperStatus">Is an APIGEE/API wrapper available for Red to use? <em>*</em></label><select id="wrapperStatus"><option value="">Select</option><option value="exists">Yes — wrapper already exists</option><option value="create">No — wrapper needs to be created/provided</option><option value="external">Third-party wrapper exists</option><option value="unknown">Not sure</option><option value="notrequired">Not required</option></select></div>
+            <div class="field hidden" id="wrapperLinkWrap"><label for="wrapperLink">APIGEE / API wrapper URL <em>*</em></label><input id="wrapperLink" type="url" placeholder="https://..."></div>
+            <div class="field full hidden" id="wrapperDetailsWrap"><label for="wrapperDetails">Existing wrapper details <em>*</em></label><textarea id="wrapperDetails" placeholder="Wrapper base URL, environment, authentication, methods exposed, owner/team, documentation link, etc."></textarea></div>
+            <div class="field full hidden" id="wrapperCreateWrap"><label for="wrapperCreateAction">If no wrapper exists, what is the plan? <em>*</em></label><textarea id="wrapperCreateAction" placeholder="Identify the application/API team who must create/provide the APIGEE wrapper, target date, required inputs and any dependency on Red."></textarea></div>
+            <div class="field full hidden" id="wrapperUnknownWrap"><label for="wrapperUnknownAction">If you are not sure, what technical owner/team should confirm this? <em>*</em></label><input id="wrapperUnknownAction" placeholder="Team / contact"></div>
+          </div>
+          <div class="tech-callout"><strong>Important:</strong> If an APIGEE/API wrapper is required but does not exist, the application/API team needs to create or provide the wrapper before Red integration can be completed. Do not assume the direct backend endpoint can be used by Red.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-title">Request / response & security</div>
+          <div class="grid two">
+            <div class="field full"><label for="headers">Required headers</label><textarea id="headers" placeholder="Content-Type, correlation ID, authorization headers, etc."></textarea></div>
+            <div class="field"><label for="auth">Authentication method <em>*</em></label><select id="auth"><option value="">Select</option><option>OAuth 2.0</option><option>Basic authentication</option><option>API key</option><option>mTLS / certificate</option><option>JWT / bearer token</option><option>Other</option><option>Not sure</option></select></div>
+            <div class="field"><label for="environment">Environment(s) required</label><input id="environment" placeholder="QA, UAT, Production"></div>
+            <div class="field full"><label for="requestPayload">Sample request / payload</label><textarea id="requestPayload" class="large"></textarea></div>
+            <div class="field full"><label for="responsePayload">Sample response / payload</label><textarea id="responsePayload" class="large"></textarea></div>
+            <div class="field full"><label for="errorHandling">Expected errors / error handling</label><textarea id="errorHandling"></textarea></div>
+            <div class="field full"><label for="systemTeamNeeds">What does the application / third-party team need from Red?</label><textarea id="systemTeamNeeds" placeholder="Callback URL, authentication, payload, headers, API specification, test data, certificates, network access, etc."></textarea></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="card reveal" id="technicalSection">
-      <div class="heading"><span class="num">6</span><div><h2>Technical owner & integration contact</h2><p>Shown after integration selection.</p></div></div>
+      <div class="heading"><span class="num">6</span><div><h2>Technical owner & integration contact</h2><p>When integration is required, provide someone who can confirm API/system details.</p></div></div>
       <div class="grid two">
-        <div class="field"><label for="techName">Application / technical owner <span id="techNameStar" class="hidden"><em>*</em></span></label><input id="techName" placeholder="Name"></div>
-        <div class="field"><label for="techEmail">Technical owner email <span id="techEmailStar" class="hidden"><em>*</em></span></label><input id="techEmail" type="email" placeholder="name@company.com"></div>
+        <div class="field"><label for="techName">Application / technical owner <span id="techNameStar" class="hidden"><em>*</em></span></label><input id="techName"></div>
+        <div class="field"><label for="techEmail">Technical owner email <span id="techEmailStar" class="hidden"><em>*</em></span></label><input id="techEmail" type="email"></div>
         <div class="field"><label for="techTeam">Team / role</label><input id="techTeam"></div>
         <div class="field"><label for="techAvailable">Is the technical owner available to work with Red? <span id="techAvailableStar" class="hidden"><em>*</em></span></label><select id="techAvailable"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
-        <div class="field full"><label>Technical documentation</label><div class="upload"><input type="file" id="techDocs" multiple><div><strong>Upload files</strong><span>Postman, API specification, architecture diagram, data dictionary, sample payload</span><small id="techDocsNames"></small></div></div></div>
+        <div class="field full"><label>Technical documentation</label><div class="upload"><input type="file" id="techDocs" multiple><div><strong>Upload technical files</strong><span>Architecture, data dictionary, API specification, sample payload, certificates information</span><small id="techDocsNames"></small></div></div></div>
       </div>
     </section>
 
     <section class="card reveal" id="securitySection">
-      <div class="heading"><span class="num">7</span><div><h2>Security & data</h2><p>Shown after the technical/integration section.</p></div></div>
-      <div class="field"><label for="security">Security, privacy, compliance, or data constraints</label><textarea id="security" class="large" placeholder="Sensitive/personal data, authorization, retention, environment restrictions, compliance, etc."></textarea></div>
+      <div class="heading"><span class="num">7</span><div><h2>Security & data</h2><p>Capture access, privacy, compliance and environment restrictions.</p></div></div>
+      <div class="grid two">
+        <div class="field"><label for="sensitiveData">Does the process use sensitive/personal/confidential data? <em>*</em></label><select id="sensitiveData"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+        <div class="field"><label for="access">Who is allowed to access this capability? <em>*</em></label><textarea id="access"></textarea></div>
+        <div class="field full"><label for="security">Security, privacy, compliance, retention or environment constraints</label><textarea id="security" class="large"></textarea></div>
+      </div>
     </section>
 
     <section class="card reveal" id="projectSection">
-      <div class="heading"><span class="num">8</span><div><h2>Project information</h2><p>Final business/project information.</p></div></div>
+      <div class="heading"><span class="num">8</span><div><h2>Project information</h2><p>Business ownership, service and benefit information.</p></div></div>
       <div class="grid two">
         <div class="field"><label for="sponsor">Sponsor</label><input id="sponsor"></div>
         <div class="field"><label for="service">ServiceNow service</label><input id="service"></div>
@@ -137,14 +173,13 @@
     </section>
 
     <section class="card reveal" id="reviewSection">
-      <div class="heading"><span class="num">9</span><div><h2>Review & submit</h2><p>The complete summary is generated automatically.</p></div></div>
+      <div class="heading"><span class="num">9</span><div><h2>Review & submit</h2><p>The summary updates automatically as you complete the form.</p></div></div>
       <div id="reviewSummary" class="review-grid"></div>
       <div class="submit-area">
         <button type="button" class="btn primary" id="submitBtn">Submit Requirement</button>
-        <div class="submit-note">Prototype only — this button does not create a ServiceNow record or call a real API.</div>
+        <div class="submit-note">Prototype only — no ServiceNow record, notification or real API call is created.</div>
       </div>
     </section>
-
   </form>
 </main>
 <div id="toast" class="toast"></div>
